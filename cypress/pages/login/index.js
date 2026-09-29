@@ -1,17 +1,19 @@
 import { elements as el } from './elements'
 
 class Login {
+
   visitarLogin() {
-    cy.visit('https://www.saucedemo.com/')
+    cy.visit('/')
   }
 
   preencherCredenciaisValidas() {
-    cy.get(el.username).type('standard_user')
-    cy.get(el.password).type('secret_sauce')
-    cy.get(el.loginButton).click()
+    cy.env(['username', 'password']).then(({ username, password }) => {
+      cy.get(el.username).type(username)
+      cy.get(el.password).type(password)
+      cy.get(el.loginButton).click()
+    })
   }
 
-  // Altere de 'preenchercredenciaisInvalidas' para 'preencherCredenciaisInvalidas'
   preencherCredenciaisInvalidas() {
     cy.get(el.username).type('user.invalid')
     cy.get(el.password).type('senha')
@@ -24,8 +26,9 @@ class Login {
         'contain.text',
         'Epic sadface: Username and password do not match any user in this service'
       )
-    
-    cy.url().should('eq', 'https://www.saucedemo.com/')
+
+    cy.location('pathname').should('eq', '/')
+
     cy.screenshot('erro ao tentar logar com credenciais inválidas')
   }
 }

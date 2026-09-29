@@ -2,8 +2,13 @@ import { elements as el } from './elements'
 
 class Inventory {
 
+   validarAcessoAoInventario() {
+    cy.location('pathname').should('eq', '/inventory.html')
+  }
+
   validarAcessoAPagina() {
-    cy.url().should('eq', 'https://www.saucedemo.com/inventory.html')
+    cy.location('pathname')
+  .should('eq', '/inventory.html')
     cy.screenshot('acesso a pagina de inventário')
   }
 

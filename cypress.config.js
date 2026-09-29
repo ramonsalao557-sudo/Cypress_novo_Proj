@@ -12,12 +12,14 @@ module.exports = defineConfig({
       reportPageTitle: 'Relatório de Testes',
       embeddedScreenshots: false, // Alterar de true para false
       inlineAssets: true,
-      saveAllAttempts: false,
+      saveAllAttempts: false
     }
   },
   chromeWebSecurity: false,
   e2e: {
     baseUrl: 'https://www.saucedemo.com/',
+    video: true,
+    screenshotOnRunFailure: true,
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
       // implement node event listeners here

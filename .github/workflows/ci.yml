@@ -1,19 +1,39 @@
 name: End-to-end tests
+
 on: push
+
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
-      - uses: actions/upload-artifact@v4
+        with:
+          command: npm run cypress:run:dev
+
+      - name: Upload Cypress reports
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-reports
           path: cypress/reports
+          if-no-files-found: error
+
+      - name: Upload Cypress screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
           if-no-files-found: ignore
-      - uses: actions/upload-artifact@v4
+
+      - name: Upload Cypress videos
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-videos
           path: cypress/videos

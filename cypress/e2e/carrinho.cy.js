@@ -9,6 +9,7 @@ beforeEach(() => {
     // Arrange
     Login.visitarLogin()
     Login.preencherCredenciaisValidas()
+    Inventory.validarAcessoAoInventario()
   })
 
   it('Adicionar produto ao carrinho com sucesso', () => {
@@ -23,14 +24,17 @@ beforeEach(() => {
     
   })
 
-  it('Remover produto do carrinho com sucesso', () => {
-    // Arrange
-    Inventory.adicionarProdutoAoCarrinho('Sauce Labs Backpack')
+it('Remover produto do carrinho com sucesso', () => {
+  // Arrange
+  Inventory.adicionarProdutoAoCarrinho('Sauce Labs Backpack')
 
-    Inventory.removerProdutoDoCarrinho('Sauce Labs Backpack')
+  // Act
+  Inventory.removerProdutoDoCarrinho('Sauce Labs Backpack')
 
-    
-    Header.validarCarrinhoVazio()
-  })
+  // Assert
+  Header.validarCarrinhoVazio()
+  Header.navegarParaCarrinho()
+  Cart.validarProdutoNaoEstaNoCarrinho('Sauce Labs Backpack')
+})
 
 })
