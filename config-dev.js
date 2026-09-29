@@ -7,10 +7,6 @@ dotenv.config({
   path: path.resolve(__dirname, './.env.dev')
 })
 
-console.log('BASE_URL:', process.env.BASE_URL)
-console.log('USER:', process.env.USER)
-console.log('PASSWORD carregado:', !!process.env.PASSWORD)
-
 module.exports = defineConfig({
   ...baseConfig,
   e2e: {
