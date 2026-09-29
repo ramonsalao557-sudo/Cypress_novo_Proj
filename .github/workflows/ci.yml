@@ -12,6 +12,10 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
+        env:
+            BASE_URL: ${{ secrets.DEV_BASE_URL }}
+            USER: ${{ secrets.DEV_USER }}
+            PASSWORD: ${{ secrets.DEV_PASSWORD }}
         with:
           command: npm run cypress:run:dev
 
